@@ -17,6 +17,7 @@ with the goal of making recipes easier to follow and more ADHD-friendly.
 ## Possible Improvements
  - Better method to input ingredients and recipe body
  - Reduce steps (automatically upload to google drive and run drive formatting script)
+ - Automatically add flour, sugar and butter weight given volume in ingredients
  - Mathematical conversion between units instead of hard-coded string replacements
  - Automatically bold descriptors for an instruction if it is followed by a colon (e.g "**Prepare the chicken**:")
  - Automaticlaly strip out step numbering from the recipe body
