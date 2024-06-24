@@ -1,5 +1,5 @@
 ## What is the point of tags?
-A tag must supply information not obtained by easily searching a word, in that way `t_sandwich` is not helpful, because you could just search “sandwich” (same for `t_sushi`). `t_wrap` is not helpful, because if you want a wrap, it’s because you have a kind of wrapper in mind (tortilla, etc), which is simpler to search by. There also weren’t enough recipes to justify the categories.
+A tag must supply information not obtained by easily searching a word, in that way `t_sandwich` is not helpful, because you could just search “sandwich” (same for `t_sushi`). `t_wrap` is not helpful, because if you want a wrap, it’s because you have a kind of wrapper in mind (tortilla, etc), which is simpler to search by. (There also weren’t enough recipes to justify the categories.)
 
 `t_soup` is helpful as it differentiates between `t_stock` and allows for searching by recipes for soup rather than those that suggest serving with soup. `t_stock` is helpful for stock recipes instead of recipes including stock as an ingredient.
 
@@ -22,33 +22,34 @@ Drink `t_drink` - Drinks excluding smoothies
 
 Deep Fried `t_deep_fry` - deep fried food (no alternative preparation methods)
 
-Fake bread `t_fake_bread` - Not a bread, but bread-like (banana bread, cornbread, etc…)
-
 Salad `t_salad`
 
 Sauce `t_sauce` - Includes vinaigrettes and dressings
 
-Smoothies and shakes `t_smoothie_shake` - Smoothies and milkshakes, not filed under drinks
+Smoothies and shakes `t_smoothie` - Smoothies and milkshakes, not filed under drinks
 
-Soup `t_soup`
+Soup `t_soup` - Includes chili
 
 Spread `t_spread`
 
 Stock `t_stock` - soup stock and broth
 
-Topping `t_topping` - can be a sauce or not, is a recipe for something which is meant to be served as a 
-topping for another recipe (e.g. spiced maple syrup, candied pistachios)
+Topping `t_topping` - to be served as a topping for another recipe (e.g. candied 
+pistachios, granola) not categorized or fully captured by the dip, sauce or 
+spread tags; includes some fillings
 
 ### Ingredients
 Recipes which contain a significant amount of the tagged ingredient
-
+<br />
+<br />
+<br />
 Fish `t_fish`
 
 Fruit `t_fruit`
 
 Meat `t_meat`
 
-Pasta `t_pasta`
+Pasta `t_pasta` - Including rice and glass noodles; homemade pasta
 
 Pulses `t_pulses` - Beans, chickpeas, dried peas, lentils and (non-wheat) grains
 
@@ -60,7 +61,9 @@ Vegetable `t_vegetable` - Potatoes not included (filed under ‘Starch’). Dish
 
 ### Homemade
 For example, to finding a recipe to make cheese, not mac 'n' cheese
-
+<br />
+<br />
+<br />
 Bread `t_bread` - Leavened bread, includes pizza
 
 Sourdough `t_sourdough` - Uses sourdough starter
@@ -120,7 +123,9 @@ Freezer-friendly `t_freeze` - Can be frozen in part or in whole, before or after
 
 ### Seasonality
 Recipe requires ingredients which are in-season (e.g heirloom tomatoes)
-
+<br />
+<br />
+<br />
 Winter `t_winter`
 
 Spring `t_spring`
@@ -131,8 +136,14 @@ Fall `t_fall`
 
 ### By Country / Ethnicity
 Not exhaustive, simply based on my existing recipes
+<br />
+<br />
+<br />
+Appalachia `t_appalachian`
 
 Argentina `t_argentinian`
+
+Austria `t_austrian`
 
 Bangladesh `t_bengalis`
 
@@ -147,6 +158,8 @@ China `t_chinese`
 Cuba `t_cuban`
 
 Cyprus `t_cypriot`
+
+English `t_english`
 
 Eritrea `t_eritrean`
 
@@ -170,9 +183,11 @@ India `t_indian`
 
 Indonesia `t_indonesian`
 
-Iran (persia) `t_iran`
+Iran (persia) `t_iranian`
 
 Ireland `t_irish`
+
+Iraq `t_iraqi`
 
 Israel `t_israeli`
 
@@ -185,6 +200,10 @@ Japan `t_japanese`
 Jews `t_jewish`
 
 Kenya `t_kenyan`
+
+Native American `t_native_american`
+
+Serbia `t_serbian`
 
 South Korea `t_korean`
 
@@ -206,13 +225,19 @@ Nigeria `t_nigerian`
 
 Peru `t_peruvian`
 
+North Africa `t_north_african`
+
 Portugal `t_portuguese`
 
 Russia `t_russian`
 
 São Tomé and Príncipe `t_santomean`
 
+Scotland `t_scottish`
+
 Senegal `t_senegalese`
+
+Scandinavia `t_scandinavian`
 
 Somalia `t_somali`
 
@@ -244,27 +269,53 @@ Yemen `t_yemeni`
 
 #### By Region
 For making food from a greater region rather than a specific country
-
+<br />
+<br />
+<br />
 *East Africa*: Eritrea, Ethiopia, Kenya, Mozambique, Somalia, Tanzania
+
 *North Africa*: North Africa
+
 *Central Africa*: São Tomé and Príncipe
+
 *South Africa*: South Africa (country)
+
 *West Africa*: Nigeria, Senegal
+<br />
+<br />
+<br />
+*North America*: Appalachia, Cajun and Creole, Hawai’i, Mexico, United States
 
-*North America*: Cajun and Creole, Hawai’i, Mexico, United States
 *South America*: Argentina, Chile, Peru, Brazil
+
 *Latin America*: Latin America, Argentina, Chile, Mexico, Peru
-
+<br />
+<br />
+<br />
 *Arab World*: Arab world, Lebanon, Morocco, Syria, United Arab Emirates, Yemen
-*Middle East*: Middle East, Cyprus, Iran, Israel, Lebanon, Turkey, United Arab Emirates, Yemen
 
+*Middle East*: Middle East, Cyprus, Iran, Iraq, Israel, Lebanon, Turkey, United Arab Emirates, Yemen
+<br />
+<br />
+<br />
 *East Asia*: China, Hong Kong, Japan, South Korea, Taiwan
+
 *South Asia*: Bangladesh, India, Sri Lanka
+
 *Southeast Asia*: Southeast Asia, Myanmar, Indonesia, Malaysia, Philippines, Thailand, Vietnam
-
+<br />
+<br />
+<br />
 *The Caribbean*: The Caribbean, Cuba, Jamaica
-
+<br />
+<br />
+<br />
 *Eastern Europe*: Russia, Ukraine
-*Northern Europe*: England, Ireland
+
+*Northern Europe*: Scandinavia, England, Ireland
+
+*Central Europe*: Austria, Serbia
+
 *Southern Europe*: Bulgaria, Greece, Italy, Portugal, Spain
+
 *Western Europe*: France, Germany

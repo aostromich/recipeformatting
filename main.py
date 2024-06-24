@@ -20,35 +20,35 @@ def format_recipe_text(ingredients, recipe):
 # Which terms trigger a tag for the recipe
 match_tags = {
     't_vegetable': ["artichoke(s)?", "arugula", "asparagus", "avocado(s)?", "bamboo shoot(s)?", "beet(s)?", "beetroot",
-                    "endive(s)?", "escarole", "pepper(s)?", "bok choy", "broccoli", "rapini", "sprout(s)?",
+                    "endive(s)?", "escarole", "pepper(s)?", "bok choy", "broccoli", "rapini", "choy sum", "sprout(s)?",
                     "cabbage(s)?", "cauliflower", "broccolini", "parsnip(s)?", "celeriac", "celery", "chard", "chicory",
-                    "napa", "collard(s)?", "corn", "courgette(s)?", "cucumber(s)?", "edamame", "perilla",
+                    "napa", "collard(s)?", "corn", "courgette(s)?", "cucumber(s)?", "edamame", "perilla", "cremini",
                     "eggplant(s)?", "fennel", "fiddlehead(s)?", "portobello(s)?", "okra", "pickle(s)?", "shiso",
                     "daikon", "shallot(s)?", "jicama", "kale", "leek(s)?", "shiitake(s)?", "zucchini(s)?", "pea(s)?",
                     "mushroom(s)?", "romaine", "lettuce", "onion(s)?", "rabe", "radicchio(s)?", "radish(es)?",
                     "rutabaga", "spinach", "butternut", "squash", "tomatillo(s|es)?", "tomato(es)?", "turnip(s)?",
                     "lotus", "burdock", "pumpkin", "watercress", "wakame", "hijiki", "tenkusa", "funori", "kimchi",
                     "sweetcorn", "snaps", "shimeji", "kabocha", "microgreens", "pesto", "carrot(s)?", "salsa",
-                    "cassava", "yuca", "green(s)?", "ancho", "guajillo", "serrano", "pimiento"],
+                    "cassava", "yuca", "green(s)?", "ancho", "guajillo", "serrano", "pimiento", "(-)?leaf"],
     't_fruit': ["(granny smith )?apple(s)?", "apricot(s)?", "banana(s)?", "(medjool )?date(s)?( syrup)?",
                 "(straw|blue|black|cran|mul|rasp)?berr(y|ies)", "cantaloupe(s)?", "cherries", "clementine(s)?",
                 "coconut(s)?", "currant(s)?", "fig(s)?", "grape(s)?", "guava", "honeydew(s)?", "jackfruit(s)?", "kiwi(s)?",
                 "lychee(s)?", "watermelon", "mandarin(s)?", "mango(es)?", "nectarine(s)?", "melon(s)?", "orange(s)?",
                 "papaya(s)?", "peach(es)?", "pear(s)?", "persimmon(s)?", "plantain(s)?", "plum(s)?", "pomegranate(s)?",
                 "raisin(s)?", "prune(s)?", "quince(s)?", "rhubarb(s)?", "starfruit(s)?", "tangerine(s)?", "jam",
-                "pineapple(s)?", "cactus", "passion fruit", "grapefruit(s)?", "whitecurrant(s)?"],
+                "pineapple(s)?", "cactus", "passion fruit", "grapefruit(s)?", "whitecurrant(s)?", "cornichon(s)?"],
     't_barbecue': ["barbecue"],
     't_salad': ["salad"],
-    't_smoothie_shake': ["smoothie", "milkshake"],
+    't_smoothie': ["smoothie", "milkshake"],
     't_soup': ["soup"],
     't_fish': ["basa", "fish", "flounder", "sole", "trout", "bass", "haddock", "pollock", "salmon", "snapper",
                 "tilapia", "carp", "catfish", "grouper", "halibut", "cod", "monkfish", "sturgeon", "anchov(y|ies)",
-                "tuna", "mackerel", "escolar", "roe", "sardine(s)?", "whitefish"],
+                "tuna", "mackerel", "escolar", "roe", "sardine(s)?", "whitefish", "smelt", "mullet"],
     't_seafood': ["shrimp", "crawfish", "crayfish", "lobster", "prawn", "cuttlefish", "clam", "oyster(?! sauce)",
                   "prawn(s)?", "mussel(s)?", "octopus", "scallop(s)?", "squid", "crab"],
     't_cool_down': ["ice cream", "popsicle"],
     't_pasta': ["pasta", "noodles", "macaroni", "spaghetti", "fettuccine", "penne", "linguine", "lasagne", "fusilli",
-                "rotini", "orzo", "tortellini", "ravioli", "rigatoni"],
+                "rotini", "orzo", "tortellini", "ravioli", "rigatoni", "ramen"],
     't_rice': ["rice(?! vinegar)", "risotto"],
     't_meat': ["meat", "beef", "chuck", "flap", "flank", "steak(s)?", "turkey", "venison", "hot dog(s)?", "mutton",
                "rabbit", "goose", "liver(s)?", "prosciutto", "salami", "sausage(s)?", "chicken", "breast(s)?",
@@ -66,17 +66,18 @@ match_tags = {
                   "marshmallow(s)?", "honeycomb", "cookie(s)?"],
     't_sweet':["(simple )?syrup"],
     't_japanese':["wasabi", "katsuobushi", "bonito"],
-    't_korean':["kimchi"]
+    't_korean':["kimchi"],
+    't_bread':["yeast"]
 }
 neg_match_tags = {
     "t_gluten_free": ["flour", "bread", "tortilla(s)?", "pita", "brioche", "sourdough", "pita(s)?", "semolina",
                       "instant", "active dry", "yeast", "wheat bran", "starter", "wheat", "cracker(s)?", "baguette",
-                      "ciabatta", "loaf", "pearl", "barley", "cereal", "naan", "wonton", "dough", "panko"] + \
-                     match_tags["t_pasta"],
+                      "ciabatta", "loaf", "pearl", "barley", "cereal", "naan", "wonton", "dough", "panko",
+                      "ramen", "rye"] + match_tags["t_pasta"],
     "t_dairy_free": ["butter", "(sweetened condensed )?milk", "(heavy )?(whipping )?cream( of tartar)?", "cheese",
                      "(greek )?yogurt", "feta", "buttermilk", "half-and-half", "mozzarella", "parmesan", "labneh",
                      "mascarpone", "creme fraiche", "queso fresco", "cheddar", "halloumi", "grana padano", "ricotta",
-                     "Monterey Jack", "queso blanco", "crema", "tzatziki", "brie", "kefir"]
+                     "Monterey Jack", "queso blanco", "crema", "tzatziki", "brie", "kefir", "gouda", "Emmental", "whey"]
 }
 starches = ["potato", "crumb(s)?", "tapioca", "flour", "starch", "quinoa", "buckwheat", "grain", "cornmeal",
             "Basmati", "potato(es)?", "bran", "millet", "amaranth", "fonio", "sorghum", "teff"] \
@@ -89,23 +90,24 @@ possible_ingredients = [
     # spices, herbs and aromatics
     # clove (the spice) is not included as garlic cloves are much more likely to show up in a recipe
     "cayenne", "powder", "peppercorn(s)?", "flakes", "((italian)? )?parsley", "lovage", "cumin", "salt", "paprika",
-    "sumac", "bay", "thyme", "allspice", "cilantro", "za'atar", "sage", "coriander", "turmeric", "cardamom(s)?",
+    "sumac", "bay", "thyme", "pimento", "allspice", "cilantro", "za'atar", "sage", "coriander", "turmeric",
     "pod(s)?", "cinnamon", "dill", "ginger", "rosemary", "basil", "oregano", "caraway", "chili(s|es)?", "chilli(es)?",
     "chile(s)?", "saffron", "nigella", "curry", "chive(s)?", "fenugreek", "baharat",  "tarragon", "mint", "nutmeg",
     "herb(s)?", "savory", "gochugaru", "garlic", "lavender", "jasmine", "besobela", "ajowan", "berbere", "garam",
-    "masala", "marjoram", "fleur de sel", "balm", "chervil",
+    "cardamom(s)?", "masala", "marjoram", "fleur de sel", "balm", "chervil", "epazote",
     # fats
     "margarine", "fat", "vegetable", "extra(-| )virgin", "canola", "rapeseed", "olive(s)?", "sunflower", "oil", "ghee",
-    "grapeseed", "shortening", "lard", "nonstick cooking spray",
+    "grapeseed", "shortening", "lard", "nonstick cooking spray", "safflower",
     # descriptors
     "hard-boiled", "toasted", "ground", "baby", "snow", "fine", "coarse", "sea", "kosher", "bell", "sherry", "balsamic",
-    "sauce", "paste", "hot", "(un)?salted", "stick(s)?", "whole", "roasted", "frozen", "dried", "fresh", "blanched",
+    "sauce", "paste", "(un)?salted", "stick(s)?", "whole", "roasted", "frozen", "dried", "fresh", "blanched",
     "flat", "preserve(s|d)", "split", "king", "raw", "superfine", "fillet(s)?", "rolled", "steel-cut", "heirloom",
     "smoke(d)?", "double", "single", "new", "mini", "broad", "evaporated", "sheet(s)?", "powdered", "old-fashioned",
     "sour", "natural", "skin-on", "(short|long)(-)?", "puffed", "crushed", "wrappers", "clarified", "flaky", "hulled",
     "sweet", "button", "enoki", "iceberg", "shelled", "grainy", "snap", "salata", "tendrils", "cannellini", "haricot",
-    "skinless", "pickled", "whipped", "cold", "mashed", "fried", "delicious", "peeled", "cooked", "roaster", "boiling",
-    "stale", "delicata", "acorn", "carnaroli", "wild", "chai", "cracked", "fingerling",
+    "skinless", "pickled", "whipped", "cold", "mashed", "fried", "delicious", "cooked", "roaster", "boiling",
+    "stale", "delicata", "acorn", "carnaroli", "wild", "chai", "cracked", "fingerling", "wood", "unsweetened", "virgin",
+    "neutral", "puree", "packed", "style",
     # place, nationality or ethnicity
     "mexican", "french", "spanish", "yukon", "worcestershire", "shaoxing", "dijon", "kalamata", "korean", "asian",
     "turkish", "espelette", "aleppo", "fresno", "holland", "japanese", "thai", "amarillo", "idaho", "korean", "venus",
@@ -116,7 +118,7 @@ possible_ingredients = [
     "blue", "russet",
     # condiments
     "tamari", "soy", "ketchup", "mustard", "harissa", "yukari", "mayonnaise", "miso", "tahini", "tehina", "gochujang",
-    "doenjang", "marmalade", "hoisin", "hummus", "dressing",
+    "doenjang", "marmalade", "hoisin", "hummus", "dressing", "malt",
     # nuts and seeds
     "sesame", "nut(s)?", "seed(s)?", "pecan(s)?", "chestnut(s)?", "pine", "flaxseed(s)?", "peanut(s)?", "walnut(s)?",
     "chia", "poppy", "hazelnut(s)?", "almond(s)?", "pepita(s)?", "pistachio(s)?", "flax", "cashew(s)?", "hemp",
@@ -130,7 +132,7 @@ possible_ingredients = [
     "blood", "caper(s)?", "tamarind", "scotch bonnet", "umeboshi", "chipotle", "arbol", "jalapeno", "stalks",
     # liquids
     "cider", "rum", "brandy", "wine", "whiskey", "stock", "broth", "dashi", "sake", "mirin", "coffee", "espresso",
-    "tea", "seltzer", "liqueur", "(rice )?vinegar", "amaretto", "champagne", "brew", "vermouth",
+    "tea", "seltzer", "liqueur", "(rice )?vinegar", "amaretto", "champagne", "brew", "vermouth", "bouillon",
     # misc
     "cornstarch", "xanthan gum", "baking", "soda", "meal", "sugar", "romero", "romano", "poblano", "wax", "germ",
     # buffalo is more likely the cheese than the meat
@@ -304,7 +306,8 @@ def universal_replace(words):
         "scallion": "green onion",
         "Scallion": "Green onion",
         "rice wine vinegar": "rice vinegar",
-        "Rice wine vinegar": "Rice vinegar"
+        "Rice wine vinegar": "Rice vinegar",
+        "cannellini": "cannellini (white kidney)"
     }
 
     words = perform_case_insensitive_replace(case_insensitive_subs, words)
@@ -382,12 +385,12 @@ class Recipe:
     yield_str = "2 servings"  # servings
     # Formatted as 'x hr(s) x min'
     # prep is the time spent actively working on the recipe
-    prep_time = "25 min"
+    prep_time = ""
     # total is the time from when you begin working on the recipe to when you sit down to eat
     total_time = "1 hr 25 min"
 
     to_serve = "Serve immediately"
-    # how to prepare a portion (or all) of the recipe in advance
+    #  how to prepare a portion (or all) of the recipe in advance
     make_ahead = ""
     # how to store the complete recipe
     storage = ""

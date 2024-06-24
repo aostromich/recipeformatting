@@ -25,3 +25,4 @@ with the goal of making recipes easier to follow and more ADHD-friendly.
  - Extract ingredients and instructions from single input
  - Batch file conversion
  - Recipe extraction from webpage
+ - Automatically extract website base url from source (if not otherwise specified)
