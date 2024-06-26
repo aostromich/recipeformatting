@@ -155,51 +155,50 @@ possible_ingredients += starches + proteins
 
 def write_file(recipe_ingredients, raw_ingredients, recipe_body, recipe):
     """Write out the formatted recipe with additional elements (e.g. time estimates)"""
-    full_recipe_txt = f"<ul>{recipe_ingredients}</ul> {recipe_body}"
-
-    with open('recipe.html', 'w') as file:
+    with open('recipe.html', 'wb') as file:
         if recipe.title == "":
-            title = "Title"
-        file.write(f"<br>{recipe.title}<br>")
+            recipe.title = "Title"
+        file_contents = f"<br>{recipe.title}<br>"
 
         multiple_times = False
         if recipe.yield_str != "":
-            file.write(f"<b>Yield</b>: {recipe.yield_str.lower()}")
+            file_contents += f"<b>Yield</b>: {recipe.yield_str.lower()}"
             multiple_times = True
         if recipe.prep_time != "":
             if multiple_times:
-                file.write(" | ")
-            file.write(f"<b>Prep Time</b>: {recipe.prep_time}")
+                file_contents += " | "
+            file_contents += f"<b>Prep Time</b>: {recipe.prep_time}"
             multiple_times = True
         if recipe.total_time != "":
             if multiple_times:
-                file.write(" | ")
-            file.write(f"<b>Total Time</b>: {recipe.total_time}")
+                file_contents += " | "
+            file_contents += f"<b>Total Time</b>: {recipe.total_time}"
         if multiple_times:
-            file.write("<br>")
+            file_contents += "<br>"
 
-        file.write(f"{full_recipe_txt}<br>")
+        file_contents += f"<ul>{recipe_ingredients}</ul> {recipe_body}<br>"
 
         if recipe.make_ahead != "" or recipe.storage != "" or recipe.to_serve != "":
-            file.write("<br>")
+            file_contents += "<br>"
             if recipe.to_serve != "":
-                file.write(f"<b>To serve</b>: {recipe.to_serve}<br>")
+                file_contents += f"<b>To serve</b>: {recipe.to_serve}<br>"
             if recipe.make_ahead != "":
-                file.write(f"<b>Make ahead</b>: {recipe.make_ahead}<br>")
+                file_contents += f"<b>Make ahead</b>: {recipe.make_ahead}<br>"
             if recipe.storage != "":
-                file.write(f"<b>Storage</b>: {recipe.storage}<br>")
+                file_contents += f"<b>Storage</b>: {recipe.storage}<br>"
         if recipe.note != "":
-            file.write(f"<br><b>Note</b>: {recipe.note}<br>")
+            file_contents += f"<br><b>Note</b>: {recipe.note}<br>"
 
-        file.write("<br>Source: ")
+        file_contents += "<br>Source: "
         if recipe.link != "":
             if recipe.source == "":
-                source = ".com stripped"
-            file.write(f'<a href="{recipe.link}">{recipe.source}</a>')
+                from urllib.parse import urlparse
+                recipe.source = urlparse(recipe.link).hostname
+            file_contents += f'<a href="{recipe.link}">{recipe.source}</a>'
         else:
-            file.write(recipe.source)
+            file_contents += recipe.source
 
-        file.write("<br><br>Tags: ")
+        file_contents += "<br><br>Tags: "
         # A set to prevent auto-generated tags from duplicating hard-coded ones
         tags_list = set()
         if recipe.default_tags:
@@ -243,22 +242,26 @@ def write_file(recipe_ingredients, raw_ingredients, recipe_body, recipe):
             elif veg_tag:
                 tags_list.add("t_vegetable_dish")
 
-        file.write(", ".join(str(e) for e in tags_list))
+        file_contents += ", ".join(str(e) for e in tags_list)
+        file.write(file_contents.encode("utf-8"))
 
 
 def universal_replace(words):
     """Perform recipe formatting (convert units to metric, etc)"""
     case_insensitive_subs = {
-        "1 tbsp\.": "1 tablespoon",
-        "1 tbsp": "1 tablespoon",
-        "tbsp\.": "tablespoons",
-        "tbsp": "tablespoons",
-        "1 tbs": "1 tablespoon",
-        "tbs": "tablespoons",
-        "1 tsp\.": "1 teaspoon",
-        "1 tsp": "1 teaspoon",
-        "tsp\.": "teaspoons",
-        "tsp": "teaspoons"
+        "(?<![0-9])1 (tbsp|tbs)(\.)?": "1 tablespoon",
+        "(?<![0-9])1 tsp(\.)?": "1 teaspoon",
+        "([0-9]+ [0-9]/[0-9]) (tbsp|tbs)(\.)?": r"\1 tablespoons",
+        "([0-9]/[0-9]) (tbsp|tbs)(\.)?": r"\1 tablespoon",
+        "([0-9]+ [0-9]/[0-9]) tsp(\.)?": r"\1 teaspoons",
+        "([0-9]/[0-9]) tsp(\.)?": r"\1 teaspoon",
+        "([0-9]+) (tbsp|tbs)(\.)?": r"\1 tablespoons",
+        "([0-9]+) tsp(\.)?": r"\1 teaspoons",
+        # capturing formatted fractions like ½
+        "([0-9]+( )?.) (tbsp|tbs)(\.)?": r"\1 tablespoons",
+        "(.) (tbsp|tbs)(\.)?": r"\1 tablespoon",
+        "([0-9]+( )?.) tsp(\.)?": r"\1 teaspoons",
+        "(.) tsp(\.)?": r"\1 teaspoon"
     }
 
     units = {
@@ -325,17 +328,19 @@ def universal_replace(words):
 def ingredients_replace(lines):
     """Format ingredients as a bulleted list"""
     # strip newlines
-    lines = [sub.replace('\n', '') for sub in lines]
+    lines = [bullet.replace('\n', '') for bullet in lines]
     lines = list(filter(None, lines))
 
-    # Bold and capitalize the ingredients
+    # Clean up, bold and capitalize the ingredients
     for index, ingredient in enumerate(lines):
+        # strip prefixing special characters
+        lines[index] = re.sub("▢( )?", "", lines[index])
         if "optional" in ingredient:
             lines[index] = lines[index][0].lower() + lines[index][1:]
             lines[index] = re.sub('(, )?(\()?optional(ly)?(\))?', "", lines[index], flags=re.IGNORECASE)
             lines[index] = "Optional: " + lines[index]
         else:
-            # attempt to bold all ingredients
+            # bold non-optional ingredients
             lines[index] = lines[index].capitalize()
             for tag_val in possible_ingredients:
                 lines[index] = re.sub('\\b' + tag_val + '\\b', r'<b>\g<0></b>', lines[index], flags=re.IGNORECASE)
@@ -418,9 +423,9 @@ class Recipe:
 
 
 if __name__ == '__main__':
-    with open('ingredients_list.txt', 'r', errors='ignore') as file:
+    with open('ingredients_list.txt', 'r', encoding='utf-8', errors='ignore') as file:
         ingredients_file = file.readlines()
-    with open('recipe_body.txt', 'r', errors='ignore') as file:
+    with open('recipe_body.txt', 'r', encoding='utf-8', errors='ignore') as file:
         recipe_file = file.read()
     ingredients_txt, recipe_body_txt = format_recipe_text(ingredients_file, recipe_file)
 
