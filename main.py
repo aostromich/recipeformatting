@@ -193,7 +193,7 @@ def write_file(recipe_ingredients, raw_ingredients, recipe_body, recipe):
         if recipe.link != "":
             if recipe.source == "":
                 from urllib.parse import urlparse
-                recipe.source = urlparse(recipe.link).hostname
+                recipe.source = urlparse(recipe.link).hostname.split('.', 1)[1]
             file_contents += f'<a href="{recipe.link}">{recipe.source}</a>'
         else:
             file_contents += recipe.source
@@ -388,45 +388,38 @@ def perform_case_insensitive_replace(substitutions, words):
 
 
 class Recipe:
-    # name of the recipe
-    title = ""
-    title = title.title()
+    import xml.etree.ElementTree as ET
+    import sys
 
-    # e.g 4 - 6 servings; 2 pizzas
-    yield_str = ""
-    # Formatted as 'x hr(s) x min'
-    # prep is the time spent actively working on the recipe
-    prep_time = ""
-    # total is the time from when you begin working on the recipe to when you sit down to eat
-    total_time = ""
+    xml_file = 'recipe.xml'
+    if sys.argv[1:]:
+        xml_file = sys.argv[1]
 
-    # serving methods or suggested sides
-    # e.g serve on chicken alongside rice; serve warm or room temperature
-    # pulled out of recipe so any side dish suggestions don't pollute the tags
-    to_serve = ""
-    #  how to prepare a portion (or all) of the recipe in advance
-    # e.g keep warm on the stove for up to an hour before serving
-    make_ahead = ""
-    # how to store the complete recipe
-    # e.g store for up to 1 week in the fridge
-    storage = ""
-    # any additional notes
-    note = ""
-    # the recipe's source
-    # e.g Nopi by Ramael Scully and Yotam Ottolenghi OR thewoksoflife.com
-    source = ""
-    # the hyperlink for the recipe, if it is from an online source
-    link = ""
+    tree = ET.parse(xml_file)
+    root = tree.getroot()
 
-    # e.g. t_advance_prep, t_vegetable
-    default_tags = ""
+    # Find the entry node
+    entry = root.find('entry')
+
+    # Extract the values and strip leading/trailing whitespace
+    title = entry.find('title').text.strip().title()
+    yield_str = entry.find('yield').text.strip()
+    prep_time = entry.find('prep_time').text.strip()
+    total_time = entry.find('total_time').text.strip()
+    to_serve = entry.find('to_serve').text.strip()
+    make_ahead = entry.find('make_ahead').text.strip()
+    storage = entry.find('storage').text.strip()
+    note = entry.find('note').text.strip()
+
+    ingredients = entry.find('ingredients').text.strip().splitlines()
+    instructions = entry.find('instructions').text.strip()
+    
+    source = entry.find('source').text.strip()
+    link = entry.find('link').text.strip()
+    default_tags = entry.find('default_tags').text.strip()
 
 
 if __name__ == '__main__':
-    with open('ingredients_list.txt', 'r', encoding='utf-8', errors='ignore') as file:
-        ingredients_file = file.readlines()
-    with open('recipe_body.txt', 'r', encoding='utf-8', errors='ignore') as file:
-        recipe_file = file.read()
-    ingredients_txt, recipe_body_txt = format_recipe_text(ingredients_file, recipe_file)
+    ingredients_txt, recipe_body_txt = format_recipe_text(Recipe.ingredients, Recipe.instructions)
 
-    write_file(ingredients_txt, ingredients_file, recipe_body_txt, Recipe())
+    write_file(ingredients_txt, Recipe.ingredients, recipe_body_txt, Recipe())

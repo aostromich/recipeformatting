@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<entry>
+
+<!-- name of the recipe -->
+<title>
+
+</title>
+
+<!-- e.g 4 - 6 servings; 2 pizzas -->
+<yield> 
+
+</yield>
+
+<!-- Formatted as 'x hr(s) x min' 
+prep is the time spent actively working on the recipe -->
+<prep_time>
+
+</prep_time>
+
+<!-- total is the time from when you begin working on the recipe to when you sit down to eat -->
+<total_time>
+
+</total_time>
+
+<!-- serving methods or suggested sides
+e.g serve on chicken alongside rice; serve warm or room temperature
+pulled out of recipe so any side dish suggestions don't pollute the tags -->
+<to_serve>
+
+</to_serve>
+
+<!-- how to prepare a portion (or all) of the recipe in advance
+e.g keep warm on the stove for up to an hour before serving-->
+<make_ahead>
+
+</make_ahead>
+
+<!-- how to store the complete recipe
+e.g store for up to 1 week in the fridge -->
+<storage>
+
+</storage>
+
+<!-- any additional notes -->
+<note>
+
+</note>
+
+<ingredients>
+
+</ingredients>
+
+<instructions>
+
+</instructions>
+
+<!-- the recipe's source
+e.g Nopi by Ramael Scully and Yotam Ottolenghi OR thewoksoflife.com -->
+<source>
+
+</source>
+
+<!-- the hyperlink for the recipe, if it is from an online source -->
+<link>
+
+</link>
+
+<!-- e.g. t_advance_prep, t_vegetable -->
+<default_tags>
+
+</default_tags>
+
+</entry>
+</document>
