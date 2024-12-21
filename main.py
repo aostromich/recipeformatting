@@ -29,7 +29,7 @@ match_tags = {
         "rutabaga", "spinach", "butternut", "squash", "tomatillo(s|es)?", "tomato(es)?", "turnip(s)?",
         "lotus", "burdock", "pumpkin", "watercress", "wakame", "hijiki", "tenkusa", "funori", "kimchi",
         "sweetcorn", "snaps", "shimeji", "kabocha", "microgreens", "pesto", "carrot(s)?", "salsa",
-        "cassava", "yuca", "green(s)?", "ancho", "guajillo", "serrano", "pimiento", "(-)?leaf",
+        "cassava", "yuca", "green(s)?", "ancho", "guajillo", "serrano", "pimiento", "(-)?lea(f|ves)",
         "sprout(s)?"],
     't_fruit': ["(granny smith )?apple(s)?", "apricot(s)?", "banana(s)?", "(medjool )?date(s)?( syrup)?",
         "(straw|blue|black|cran|mul|rasp)?berr(y|ies)", "cantaloupe(s)?", "cherries", "clementine(s)?",
@@ -37,8 +37,8 @@ match_tags = {
         "lychee(s)?", "watermelon", "mandarin(s)?", "mango(es)?", "nectarine(s)?", "melon(s)?", "orange(s)?",
         "papaya(s)?", "peach(es)?", "pear(s)?", "persimmon(s)?", "plantain(s)?", "plum(s)?", "pomegranate(s)?",
         "raisin(s)?", "prune(s)?", "quince(s)?", "rhubarb(s)?", "starfruit(s)?", "tangerine(s)?", "jam",
-        "pineapple(s)?", "cactus", "passion fruit", "grapefruit(s)?", "whitecurrant(s)?", "cornichon(s)?",
-        "kiwi(s)?",],
+        "jelly", "pineapple(s)?", "cactus", "passion fruit", "grapefruit(s)?", "whitecurrant(s)?",
+        "cornichon(s)?", "kiwi(s)?", "applesauce"],
     't_barbecue': ["barbecue"],
     't_salad': ["salad"],
     't_smoothie': ["smoothie", "milkshake"],
@@ -53,37 +53,37 @@ match_tags = {
         "fusilli", "rotini", "orzo", "tortellini", "ravioli", "rigatoni", "ramen"],
     't_rice': ["rice(?! vinegar)", "risotto"],
     't_meat': ["meat", "beef", "chuck", "flap", "flank", "steak(s)?", "turkey", "venison", "hot dog(s)?",
-        "rabbit", "goose", "liver(s)?", "prosciutto", "salami", "sausage(s)?", "chicken", "breast(s)?",
+        "rabbit", "goose", "liver(s)?", "prosciutto", "salami", "sausage(s)?", "chicken(s)?", "breast(s)?",
         "thigh(s)?", "ham", "bacon", "lamb", "goat", "pork", "boneless", "bone-in", "(-)?eye", "rib(s)?",
         "duck(ling)?", "tenderloin", "drumstick(s)?", "brisket", "sirloin", "shank", "shoulder", "belly",
-        "skirt", "quail", "bison", "mutton"],
+        "skirt", "quail", "bison", "mutton", "veal"],
     't_pulses': ["black (turtle )?beans", "Great Northern beans",
-        "(broad|fava|butter|baby|large|lima|cannellini|kidney|mung|navy|pinto|romano|borlotti|cranberry) beans",
+        "(broad|fava|butter|baby|large|lima|cannellini|mung|navy|pinto|romano|borlotti|cranberry) beans",
         "dal", "black gram", "chickpeas", "garbanzo", "(black-eyed|split)? peas",
         "(beluga|brown|green|Puy|red)? lentils", "quinoa", "barley", "buckwheat", "millet"],
     # Plain sugar is often used in savory recipes, exclude it from this tag
     't_dessert': ["chocolate", "semi-sweet", "brownie", "pie", "cake", "tart", "maple syrup", "honey",
         "ice cream", "popsicle", "pudding", "dulce de leche", "vanilla( extract)?", "cocoa", "matcha",
         "(raw )?(confectioners(')?|icing|demerara|coconut|muscovado|superfine)", "cookie", "bittersweet",
-        "marshmallow(s)?", "honeycomb", "cookie(s)?"],
+        "marshmallow(s)?", "honeycomb", "cookie(s)?", "caramel"],
     't_sweet':["(simple )?syrup"],
     't_japanese':["wasabi", "katsuobushi", "bonito"],
     't_korean':["kimchi"],
     't_bread':["yeast"]
 }
 neg_match_tags = {
-    "t_gluten_free": ["flour", "bread", "tortilla(s)?", "pita", "brioche", "sourdough", "pita(s)?", "semolina",
+    "t_gluten_free": ["flour", "bread(s)?", "tortilla(s)?", "pita", "brioche", "sourdough", "pita(s)?", "semolina",
         "instant", "active dry", "yeast", "wheat bran", "starter", "wheat", "cracker(s)?", "baguette",
-        "ciabatta", "loaf", "pearl", "barley", "cereal", "naan", "wonton", "dough", "panko",
-        "ramen", "rye"] + match_tags["t_pasta"],
+        "ciabatta", "loaf", "pearl", "barley", "cereal", "naan", "wonton", "dough", "panko", "flatbread", "bao",
+        "ramen", "rye", "buns"] + match_tags["t_pasta"],
     "t_dairy_free": ["butter", "(sweetened condensed )?milk", "(heavy )?(whipping )?cream( of tartar)?",
         "(greek )?yogurt", "feta", "buttermilk", "half-and-half", "mozzarella", "parmesan", "labneh",
         "mascarpone", "creme fraiche", "queso fresco", "cheddar", "halloumi", "grana padano", "ricotta",
         "Monterey Jack", "queso blanco", "crema", "tzatziki", "brie", "kefir", "gouda", "Emmental", "whey",
         "cheese",]
 }
-starches = ["potato", "crumb(s)?", "tapioca", "flour", "starch", "quinoa", "buckwheat", "grain", "cornmeal",
-        "Basmati", "potato(es)?", "bran", "millet", "amaranth", "fonio", "sorghum", "teff"] \
+starches = ["potato", "crumb(s)?", "breadcrumb(s)?", "tapioca", "flour", "starch", "quinoa", "buckwheat", "grain",
+        "cornmeal", "Basmati", "potato(es)?", "bran", "millet", "amaranth", "fonio", "sorghum", "teff"] \
         + match_tags["t_pasta"] + match_tags["t_rice"]
 proteins = ["egg(s)?", "yolk(s)?", "fava", "lima", "bean(s)?", "chickpea(s)?", "lentil(s)?", "tofu"] + \
         match_tags["t_meat"] + match_tags["t_fish"] + match_tags["t_seafood"]
@@ -97,37 +97,40 @@ possible_ingredients = [
     "pod(s)?", "cinnamon", "dill", "ginger", "rosemary", "basil", "oregano", "caraway", "chili(s|es)?", "chilli(es)?",
     "chile(s)?", "saffron", "nigella", "curry", "chive(s)?", "fenugreek", "baharat",  "tarragon", "mint", "nutmeg",
     "herb(s)?", "savory", "gochugaru", "garlic", "lavender", "jasmine", "besobela", "ajowan", "berbere", "garam",
-    "cardamom(s)?", "masala", "marjoram", "fleur de sel", "balm", "chervil", "epazote",
+    "cardamom(s)?", "masala", "marjoram", "fleur de sel", "balm", "chervil", "epazote", "spice", "zest", "star anise",
+    "biber", "rosebud(s)?", "mace", "orris", "galangal", "lemongrass",
     # fats
     "margarine", "fat", "vegetable", "extra(-| )virgin", "canola", "rapeseed", "olive(s)?", "sunflower", "oil", "ghee",
-    "grapeseed", "shortening", "lard", "nonstick cooking spray", "safflower",
+    "grapeseed", "shortening", "lard", "nonstick cooking spray", "safflower", "soybean",
     # descriptors
     "hard-boiled", "toasted", "ground", "baby", "snow", "fine", "coarse", "sea", "kosher", "bell", "sherry", "balsamic",
     "sauce", "paste", "(un)?salted", "stick(s)?", "whole", "roasted", "frozen", "dried", "fresh", "blanched",
-    "flat", "preserve(s|d)", "split", "king", "raw", "superfine", "fillet(s)?", "rolled", "steel-cut", "heirloom",
-    "smoke(d)?", "double", "single", "new", "mini", "broad", "evaporated", "sheet(s)?", "powdered", "old-fashioned",
-    "sour", "natural", "skin-on", "(short|long)(-)?", "puffed", "crushed", "wrappers", "clarified", "flaky", "hulled",
-    "sweet", "button", "enoki", "iceberg", "shelled", "grainy", "snap", "salata", "tendrils", "cannellini", "haricot",
-    "skinless", "pickled", "whipped", "cold", "mashed", "fried", "delicious", "cooked", "roaster", "boiling",
-    "stale", "delicata", "acorn", "carnaroli", "wild", "chai", "cracked", "fingerling", "wood", "unsweetened", "virgin",
-    "neutral", "puree", "packed", "style",
+    "flat", "curly", "preserve(s|d)", "split", "king", "raw", "superfine", "fillet(s)?", "rolled", "steel-cut",
+    "heirloom", "smoke(d)?", "double", "single", "new", "mini", "broad", "evaporated", "sheet(s)?", "powdered",
+    "old-fashioned", "sour", "natural", "skin-on", "(short|long)(-)?", "puffed", "crushed", "wrappers", "clarified",
+    "flaky", "hulled", "sweet", "button", "enoki", "iceberg", "shelled", "grainy", "snap", "salata", "tendrils",
+    "cannellini", "haricot", "skinless", "pickled", "whipped", "cold", "mashed", "fried", "delicious", "cooked",
+    "roaster", "boiling", "stale", "delicata", "acorn", "carnaroli", "wild", "chai", "cracked", "fingerling", "wood",
+    "unsweetened", "virgin", "neutral", "puree", "packed", "style", "dry", "bbq", "liquid", "ripe", "blade(s)?",
+    "boiled", "top", "round",
     # place, nationality or ethnicity
     "mexican", "french", "spanish", "yukon", "worcestershire", "shaoxing", "dijon", "kalamata", "korean", "asian",
     "turkish", "espelette", "aleppo", "fresno", "holland", "japanese", "thai", "amarillo", "idaho", "korean", "venus",
     "szechuan", "kashmiri", "swiss", "english", "persian", "brussels", "castelvetrano", "hungarian", "cotija",
-    "chinese", "calabrian", "arborio", "sichuan", "guizhou", "european",
+    "chinese", "calabrian", "arborio", "sichuan", "guizhou", "european", "boston",
     # colour
     "dark", "light", "brown", "yellow", "orange", "black", "navy", "white", "pink", "gold(en)?", "purple", "red",
     "blue", "russet",
     # condiments
     "tamari", "soy", "ketchup", "mustard", "harissa", "yukari", "mayonnaise", "miso", "tahini", "tehina", "gochujang",
-    "doenjang", "marmalade", "hoisin", "hummus", "dressing", "malt",
+    "doenjang", "marmalade", "hoisin", "hummus", "dressing", "malt", "catsup", "adobo", "sambal", "oelek", "horseradish",
+    "sriracha",
     # nuts and seeds
     "sesame", "nut(s)?", "seed(s)?", "pecan(s)?", "chestnut(s)?", "pine", "flaxseed(s)?", "peanut(s)?", "walnut(s)?",
     "chia", "poppy", "hazelnut(s)?", "almond(s)?", "pepita(s)?", "pistachio(s)?", "flax", "cashew(s)?", "hemp",
     "psyllium husk",
     # produce
-    "lemon(s)?", "lime(s)?", "kombu", "konbu", "seaweed", "gim", "nori", "yuzu", "bergamot",
+    "lemon(s)?", "lime(s)?", "kombu", "konbu", "seaweed", "gim", "nori", "yuzu", "bergamot", "citrus",
     # Cherry is here as it's unlikely for a recipe to call for 1 cherry and otherwise, cherry tomatoes trigger the
     # fruit categorization
     "cherry", "scallion(s)?", "kernel(s)?", "(edible )?flower(s)?", "wildflower", "borage", "marigold", "root",
@@ -138,6 +141,7 @@ possible_ingredients = [
     "tea", "seltzer", "liqueur", "(rice )?vinegar", "amaretto", "champagne", "brew", "vermouth", "bouillon",
     # misc
     "cornstarch", "xanthan gum", "baking", "soda", "meal", "sugar", "romero", "romano", "poblano", "wax", "germ",
+    "kidney(s)", # either the bean or the meat
     # buffalo is more likely the cheese than the meat
     "buffalo", "molasses", "oat(s)?", "cottage", "tabasco", "gelatin", "pectin", "palm", "pulp", "popcorn",
     # sour cream doesn't bold in the dairy category and the cream ensures the DF tag isnt added
@@ -208,7 +212,7 @@ def write_file(recipe_ingredients, raw_ingredients, recipe_body, recipe):
 
         # Guess at possibly applicable tags
         # This is a rudimentary system and must be corrected manually
-        raw_ingredients = ''.join(raw_ingredients)
+        raw_ingredients = ' '.join(raw_ingredients)
         for key, value in match_tags.items():
             # Search for whole-word matches only
             if any(re.search(r"\b" + match + r"\b", raw_ingredients.lower()) for match in value):
@@ -311,6 +315,14 @@ def universal_replace(words):
         "Scallions": "Green onions",
         "scallion": "green onion",
         "Scallion": "Green onion",
+        "aubergines": "eggplants",
+        "Aubergines": "Eggplants",
+        "aubergine": "eggplant",
+        "Aubergine": "Eggplant",
+        "courgettes": "zucchini",
+        "Courgettes": "Zucchini",
+        "courgette": "zucchini",
+        "Courgette": "Zucchini",
         "rice wine vinegar": "rice vinegar",
         "Rice wine vinegar": "Rice vinegar",
         "cannellini": "cannellini (white kidney)"
@@ -321,6 +333,7 @@ def universal_replace(words):
     # words = perform_case_insensitive_replace(units, words)
     words = perform_replace(ingredient_renames, words)
     words = words.replace('<br><br>', '<br>')
+    words = words.replace('\n\n', '\n')
 
     return words
 

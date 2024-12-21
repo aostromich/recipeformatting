@@ -139,6 +139,8 @@ Not exhaustive, simply based on my existing recipes
 <br />
 <br />
 <br />
+African American t_african_american
+
 Appalachia `t_appalachian`
 
 Argentina `t_argentinian`
@@ -183,7 +185,7 @@ India `t_indian`
 
 Indonesia `t_indonesian`
 
-Iran (persia) `t_iranian`
+Iran `t_iranian`
 
 Ireland `t_irish`
 
@@ -226,6 +228,8 @@ Nigeria `t_nigerian`
 Peru `t_peruvian`
 
 North Africa `t_north_african`
+
+Perian `t_persian`
 
 Portugal `t_portuguese`
 

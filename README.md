@@ -12,6 +12,7 @@ with the goal of making recipes easier to follow and more ADHD-friendly.
  - Although this was built with Google Drive in mind, the tag format depends on exact searches which Drive no longer supports (in early 2024). Recipes must be mirrored elsewhere to leverage tags (e.g using rclone).
  - Titles with apostrophies capitalize overzealously (e.g Za'Atar instead of the correct Za'atar)
  - Removes correct capitalization from ingredients list (e.g converts "Japanese mayonnaise" to all lowercase)
+ - Including some non-alphanumeric charachters including '+' and '&' in the recipe breaks the output
 
 ## Possible Improvements
  - Better method to input recipe (currently XML...)
@@ -24,3 +25,4 @@ with the goal of making recipes easier to follow and more ADHD-friendly.
  - Batch file conversion
  - Recipe extraction from webpage
  - Add more robust testing (more unit tests, adding end-to-end test, etc)
+ - automatically convert 4 tablespoons to 1/4 cup, 3 teaspoons to 1 tablespoon, and 8 tablespoons to 1/2 cup
