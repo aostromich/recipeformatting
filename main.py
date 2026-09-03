@@ -50,7 +50,7 @@ match_tags = {
         "oyster(?! sauce)", "mussel(s)?", "octopus", "scallop(s)?", "squid", "crab"],
     't_cool_down': ["ice cream", "popsicle"],
     't_pasta': ["pasta", "noodles", "macaroni", "spaghetti", "fettuccine", "penne", "linguine", "lasagne",
-        "fusilli", "rotini", "orzo", "tortellini", "ravioli", "rigatoni", "ramen"],
+        "fusilli", "rotini", "orzo", "tortellini", "ravioli", "rigatoni", "ramen", "vermicelli", "soba"],
     't_rice': ["rice(?! vinegar)", "risotto"],
     't_meat': ["meat", "beef", "chuck", "flap", "flank", "steak(s)?", "turkey", "venison", "hot dog(s)?",
         "rabbit", "goose", "liver(s)?", "prosciutto", "salami", "sausage(s)?", "chicken(s)?", "breast(s)?",
@@ -65,7 +65,7 @@ match_tags = {
     't_dessert': ["chocolate", "semi-sweet", "brownie", "pie", "cake", "tart", "maple syrup", "honey",
         "ice cream", "popsicle", "pudding", "dulce de leche", "vanilla( extract)?", "cocoa", "matcha",
         "(raw )?(confectioners(')?|icing|demerara|coconut|muscovado|superfine)", "cookie", "bittersweet",
-        "marshmallow(s)?", "honeycomb", "cookie(s)?", "caramel"],
+        "marshmallow(s)?", "honeycomb", "cookie(s)?", "caramel", "agave"],
     't_sweet':["(simple )?syrup"],
     't_japanese':["wasabi", "katsuobushi", "bonito"],
     't_korean':["kimchi"],
@@ -73,14 +73,14 @@ match_tags = {
 }
 neg_match_tags = {
     "t_gluten_free": ["flour", "bread(s)?", "tortilla(s)?", "pita", "brioche", "sourdough", "pita(s)?", "semolina",
-        "instant", "active dry", "yeast", "wheat bran", "starter", "wheat", "cracker(s)?", "baguette",
+        "instant", "yeast", "wheat bran", "starter", "wheat", "cracker(s)?", "baguette",
         "ciabatta", "loaf", "pearl", "barley", "cereal", "naan", "wonton", "dough", "panko", "flatbread", "bao",
         "ramen", "rye", "buns"] + match_tags["t_pasta"],
     "t_dairy_free": ["butter", "(sweetened condensed )?milk", "(heavy )?(whipping )?cream( of tartar)?",
         "(greek )?yogurt", "feta", "buttermilk", "half-and-half", "mozzarella", "parmesan", "labneh",
         "mascarpone", "creme fraiche", "queso fresco", "cheddar", "halloumi", "grana padano", "ricotta",
         "Monterey Jack", "queso blanco", "crema", "tzatziki", "brie", "kefir", "gouda", "Emmental", "whey",
-        "cheese",]
+        "cheese", "ghee"]
 }
 starches = ["potato", "crumb(s)?", "breadcrumb(s)?", "tapioca", "flour", "starch", "quinoa", "buckwheat", "grain",
         "cornmeal", "Basmati", "potato(es)?", "bran", "millet", "amaranth", "fonio", "sorghum", "teff"] \
@@ -98,7 +98,7 @@ possible_ingredients = [
     "chile(s)?", "saffron", "nigella", "curry", "chive(s)?", "fenugreek", "baharat",  "tarragon", "mint", "nutmeg",
     "herb(s)?", "savory", "gochugaru", "garlic", "lavender", "jasmine", "besobela", "ajowan", "berbere", "garam",
     "cardamom(s)?", "masala", "marjoram", "fleur de sel", "balm", "chervil", "epazote", "spice", "zest", "star anise",
-    "biber", "rosebud(s)?", "mace", "orris", "galangal", "lemongrass",
+    "biber", "rosebud(s)?", "mace", "orris", "galangal", "lemongrass", "hibiscus",
     # fats
     "margarine", "fat", "vegetable", "extra(-| )virgin", "canola", "rapeseed", "olive(s)?", "sunflower", "oil", "ghee",
     "grapeseed", "shortening", "lard", "nonstick cooking spray", "safflower", "soybean",
@@ -112,7 +112,7 @@ possible_ingredients = [
     "cannellini", "haricot", "skinless", "pickled", "whipped", "cold", "mashed", "fried", "delicious", "cooked",
     "roaster", "boiling", "stale", "delicata", "acorn", "carnaroli", "wild", "chai", "cracked", "fingerling", "wood",
     "unsweetened", "virgin", "neutral", "puree", "packed", "style", "dry", "bbq", "liquid", "ripe", "blade(s)?",
-    "boiled", "top", "round",
+    "boiled", "top", "round", "sticky", "nectar", "active",
     # place, nationality or ethnicity
     "mexican", "french", "spanish", "yukon", "worcestershire", "shaoxing", "dijon", "kalamata", "korean", "asian",
     "turkish", "espelette", "aleppo", "fresno", "holland", "japanese", "thai", "amarillo", "idaho", "korean", "venus",
@@ -130,7 +130,7 @@ possible_ingredients = [
     "chia", "poppy", "hazelnut(s)?", "almond(s)?", "pepita(s)?", "pistachio(s)?", "flax", "cashew(s)?", "hemp",
     "psyllium husk",
     # produce
-    "lemon(s)?", "lime(s)?", "kombu", "konbu", "seaweed", "gim", "nori", "yuzu", "bergamot", "citrus",
+    "lemon(s)?", "lime(s)?", "kombu", "konbu", "seaweed", "gim", "nori", "yuzu", "bergamot", "citrus", "makrut",
     # Cherry is here as it's unlikely for a recipe to call for 1 cherry and otherwise, cherry tomatoes trigger the
     # fruit categorization
     "cherry", "scallion(s)?", "kernel(s)?", "(edible )?flower(s)?", "wildflower", "borage", "marigold", "root",
@@ -138,7 +138,8 @@ possible_ingredients = [
     "blood", "caper(s)?", "tamarind", "scotch bonnet", "umeboshi", "chipotle", "arbol", "jalapeno", "stalks",
     # liquids
     "cider", "rum", "brandy", "wine", "whiskey", "stock", "broth", "dashi", "sake", "mirin", "coffee", "espresso",
-    "tea", "seltzer", "liqueur", "(rice )?vinegar", "amaretto", "champagne", "brew", "vermouth", "bouillon",
+    "tea", "seltzer", "liqueur", "(rice )?vinegar", "amaretto", "champagne", "brew", "vermouth", "bouillon", "vodka",
+    "bourbon",
     # misc
     "cornstarch", "xanthan gum", "baking", "soda", "meal", "sugar", "romero", "romano", "poblano", "wax", "germ",
     "kidney(s)", # either the bean or the meat
@@ -253,19 +254,19 @@ def write_file(recipe_ingredients, raw_ingredients, recipe_body, recipe):
 def universal_replace(words):
     """Perform recipe formatting (convert units to metric, etc)"""
     case_insensitive_subs = {
-        "(?<![0-9])1 (tbsp|tbs)(\.)?": "1 tablespoon",
-        "(?<![0-9])1 tsp(\.)?": "1 teaspoon",
-        "([0-9]+ [0-9]/[0-9]) (tbsp|tbs)(\.)?": r"\1 tablespoons",
-        "([0-9]/[0-9]) (tbsp|tbs)(\.)?": r"\1 tablespoon",
-        "([0-9]+ [0-9]/[0-9]) tsp(\.)?": r"\1 teaspoons",
-        "([0-9]/[0-9]) tsp(\.)?": r"\1 teaspoon",
-        "([0-9]+) (tbsp|tbs)(\.)?": r"\1 tablespoons",
-        "([0-9]+) tsp(\.)?": r"\1 teaspoons",
+        r"(?<![0-9])1 (tbsp|tbs)(\.)?": "1 tablespoon",
+        r"(?<![0-9])1 tsp(\.)?": "1 teaspoon",
+        r"([0-9]+ [0-9]/[0-9]) (tbsp|tbs)(\.)?": r"\1 tablespoons",
+        r"([0-9]/[0-9]) (tbsp|tbs)(\.)?": r"\1 tablespoon",
+        r"([0-9]+ [0-9]/[0-9]) tsp(\.)?": r"\1 teaspoons",
+        r"([0-9]/[0-9]) tsp(\.)?": r"\1 teaspoon",
+        r"([0-9]+) (tbsp|tbs)(\.)?": r"\1 tablespoons",
+        r"([0-9]+) tsp(\.)?": r"\1 teaspoons",
         # capturing formatted fractions like ½
-        "([0-9]+( )?.) (tbsp|tbs)(\.)?": r"\1 tablespoons",
-        "(.) (tbsp|tbs)(\.)?": r"\1 tablespoon",
-        "([0-9]+( )?.) tsp(\.)?": r"\1 teaspoons",
-        "(.) tsp(\.)?": r"\1 teaspoon"
+        r"([0-9]+( )?.) (tbsp|tbs)(\.)?": r"\1 tablespoons",
+        r"(.) (tbsp|tbs)(\.)?": r"\1 tablespoon",
+        r"([0-9]+( )?.) tsp(\.)?": r"\1 teaspoons",
+        r"(.) tsp(\.)?": r"\1 teaspoon"
     }
 
     units = {
@@ -288,13 +289,13 @@ def universal_replace(words):
         "14(-inch| inches|\")": "36 cm",
         "15(-inch| inches|\")": "38 cm",
         "16(-inch| inches|\")": "41 cm",
-        " 1/2 (lb|pound|lb\.)": " 113 g",
-        " 3/4 (lb|pound|lb\.)": " 340 g",
-        " 1 (lb|pound|lb\.)": " 454 g",
-        " 1 1/2 (lbs|lbs\.|pounds)": " 680 g",
-        " 2 (lbs|lbs\.|pounds)": " 907 g",
-        " 2 1/2 (lbs|lbs\.|pounds)": " 1.13 kg",
-        " 3 (lbs|lbs\.|pounds)": " 1.4 kg",
+        r" 1/2 (lb|pound|lb\.)": " 113 g",
+        r" 3/4 (lb|pound|lb\.)": " 340 g",
+        r" 1 (lb|pound|lb\.)": " 454 g",
+        r" 1 1/2 (lbs|lbs\.|pounds)": " 680 g",
+        r" 2 (lbs|lbs\.|pounds)": " 907 g",
+        r" 2 1/2 (lbs|lbs\.|pounds)": " 1.13 kg",
+        r" 3 (lbs|lbs\.|pounds)": " 1.4 kg",
         "1/2 ounce": "14 g",
         "1 ounce": "28 g",
         "1 1/2 ounces": "43 g",
@@ -350,7 +351,7 @@ def ingredients_replace(lines):
         lines[index] = re.sub("▢( )?", "", lines[index])
         if "optional" in ingredient:
             lines[index] = lines[index][0].lower() + lines[index][1:]
-            lines[index] = re.sub('(, )?(\()?optional(ly)?(\))?', "", lines[index], flags=re.IGNORECASE)
+            lines[index] = re.sub(r'(, )?(\()?optional(ly)?(\))?', "", lines[index], flags=re.IGNORECASE)
             lines[index] = "Optional: " + lines[index]
         else:
             # bold non-optional ingredients
